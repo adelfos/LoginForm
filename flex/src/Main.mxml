@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:containers="mx.containers.*"
+               xmlns:components="ru.adelfos.login.view.components.*"
+               backgroundColor="#333333"
+               creationComplete="facade.startup(this);"
+>
+    <fx:Script><![CDATA[
+        import ru.adelfos.login.ApplicationFacade;
+
+        private var facade: ApplicationFacade = ApplicationFacade.getInstance();
+        ]]></fx:Script>
+    <s:layout>
+        <s:VerticalLayout horizontalAlign="center"
+                          paddingLeft="10" paddingRight="10"
+                          paddingTop="10" paddingBottom="10"/>
+    </s:layout>
+
+    <containers:ViewStack id="viewStack" width="400" >
+        <components:LoginPanel id="loginPanel"/>
+        <components:RegistrationPanel id="registrationPanel"/>
+        <components:ProfilePanel id="profilePanel"/>
+    </containers:ViewStack>
+</s:Application>

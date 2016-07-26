@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+  Created by adelfos on 18.07.2016.
+-->
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+                    width="100%">
+
+    <s:layout>
+        <s:VerticalLayout paddingLeft="10" paddingRight="10"
+                          paddingTop="10" paddingBottom="10"/>
+    </s:layout>
+    <fx:Script><![CDATA[
+        import mx.controls.Alert;
+
+        public static const TRY_LOGIN:String = "tryLogin";
+        public static const NEED_REGISTRATION:String = "needRegistration";
+
+        private function clickHandler(event:MouseEvent):void {
+
+            login.errorString = login.text == "" ? login.toolTip : "";
+            password.errorString = password.text == "" ? password.toolTip : "";
+
+            if (login.errorString == "" && password.errorString == "")
+                this.dispatchEvent(new Event(TRY_LOGIN));
+        }
+        ]]></fx:Script>
+
+    <s:Panel title="Логин" width="100%">
+
+    <mx:Form>
+        <s:Label width="100%"
+                 text="Введите логин и пароль"/>
+
+        <mx:FormItem label="Логин: " required="true">
+            <s:TextInput id="login" width="100%" toolTip="Введите логин"/>
+        </mx:FormItem>
+
+        <mx:FormItem label="Пароль: " required="true">
+            <s:TextInput id="password" width="100%" displayAsPassword="true" toolTip="Введите пароль"/>
+        </mx:FormItem>
+
+        <mx:FormItem>
+            <s:Button id="submitButton" enabled="true"
+                      label="Вход" click="clickHandler(event)" />
+            <s:Button id="registration" enabled="true"
+                      label="Регистрация" click="{this.dispatchEvent(new Event(NEED_REGISTRATION));}" />
+        </mx:FormItem>
+    </mx:Form>
+    </s:Panel>
+</s:NavigatorContent>

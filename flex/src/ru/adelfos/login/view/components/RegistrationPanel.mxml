@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+  Created by adelfos on 20.07.2016.
+-->
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+                    width="100%"
+                    show="showHandler(event)"
+          >
+
+    <fx:Script><![CDATA[
+        import mx.events.FlexEvent;
+
+        public static const TRY_REGISTRATION:String = "tryRegistration";
+        public static const NEED_LOGIN:String = "needLogin";
+
+        private var regs:Dictionary = new Dictionary();
+
+        private function showHandler(event:FlexEvent):void {
+            regs [password] = /^[A-z0-9!@#$%^*()]+$/;
+            regs [email] = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            regs [name1] = /^[А-яA-z]+$/;
+            regs [surname] = /^[А-яA-z]+$/;
+        }
+
+        private function clickHandler(event:MouseEvent):void {
+            var canSubmit:Boolean = true;
+            for (var key:* in regs) {
+                var textInput:TextInput = key as TextInput;
+                var regExp:RegExp = regs[key];
+
+                if (!regExp.test(textInput.text)) {
+                    textInput.errorString = key.toolTip;
+                    canSubmit = false;
+                }
+                else {
+                    textInput.errorString = "";
+                }
+            }
+            if (canSubmit)
+                this.dispatchEvent(new Event(TRY_REGISTRATION));
+        }
+        ]]></fx:Script>
+<s:Panel title="Регистрация" width="100%">
+    <mx:Form>
+        <s:Label width="100%"
+                 text="Заполните следующие поля"/>
+
+        <mx:FormItem label="Логин: " required="true">
+            <s:TextInput id="login" width="100%" toolTip="Только цыфры и латинские буквы" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Пароль: " required="true">
+            <s:TextInput id="password" width="100%" displayAsPassword="true"
+                         toolTip="Только цыфры, латинские буквы и символы: !@#$%^*()" />
+        </mx:FormItem>
+
+        <mx:FormItem label="E-mail: " required="true">
+            <s:TextInput id="email" width="100%"
+                         toolTip="Введите емайл"  />
+        </mx:FormItem>
+
+        <mx:FormItem label="Имя: " required="true">
+            <s:TextInput id="name1" width="100%"
+                         toolTip="Только буквы" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Фамилия: " required="true">
+            <s:TextInput id="surname" width="100%"
+                         toolTip="Только буквы" />
+        </mx:FormItem>
+
+        <mx:FormItem>
+            <s:Button id="submitButton" enabled="true"
+                      label="Регистрация" click="clickHandler(event)"  />
+            <s:Button enabled="true"
+                      label="Войти"  click="{this.dispatchEvent(new Event(NEED_LOGIN));}" />
+        </mx:FormItem>
+    </mx:Form>
+</s:Panel>
+</s:NavigatorContent>

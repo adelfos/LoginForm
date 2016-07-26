@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  Created by adelfos on 20.07.2016.
+-->
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+                    width="100%"
+>
+<s:Panel title="Профиль пользователя" width="100%">
+    <mx:Form>
+        <s:Label width="100%"
+                 text="Ваши данные:"/>
+
+        <mx:FormItem label="Логин: " required="false">
+            <s:Label id="login" width="100%" />
+        </mx:FormItem>
+
+        <mx:FormItem label="E-mail: " required="false">
+            <s:Label id="email" width="100%" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Имя: " required="false">
+            <s:Label id="name1" width="100%" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Фамилия: " required="false">
+            <s:Label id="surname" width="100%" />
+        </mx:FormItem>
+    </mx:Form>
+</s:Panel>
+</s:NavigatorContent>
